@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import ListContayner from './Contayners/ListContainer';
+
+import HeaderContainer from './containers/HeaderContainer';
+import ListContainer from './containers/ListContainer';
 
 class App extends Component {
   render() {
     return (
-      <ListContayner />
+      <main>
+        <HeaderContainer />
+        <ListContainer />
+      </main>
     );
   }
 }

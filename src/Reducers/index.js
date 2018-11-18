@@ -1,10 +1,9 @@
-const initialState = [];
+import { combineReducers } from 'redux';
 
-const reducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    default:
-      return state;
-  }
-};
+import goods from './goods';
+import sortedGoods from './sortedGoods';
 
-export default reducer;
+export default combineReducers({
+  goods,
+  sortedGoods,
+});

@@ -1,15 +1,13 @@
 import React from 'react';
 
-const Good = ({title, price, url, oldPrice}) => {
+const Good = ({title, url, price, oldPrice}) => {
   return (
-    <table>
-      <tr>
-        <td><h1>{title}</h1></td>
-        <td><img src={url} alt="good"/> </td>
-        <td><span>{price}</span></td>
-        <td><span>{oldPrice}</span></td>
-      </tr>
-    </table>
+    <tr>
+      <td><img src={url} alt="good"/> </td>
+      <td><h1>{title}</h1></td>
+      <td><div>{price}</div></td>
+      <td><span>{oldPrice}</span></td>
+    </tr>
   );
 }
 
