@@ -16,23 +16,34 @@ class Header extends React.Component {
     };
   }
 
-  handlChange = (e) => {
-    const { filterAndSort } = this.props;
-    const title = e.target.value;
 
-    this.setState({ title }, () => {
-      const {title} = this.state;
+  handlChange = (e, fieldName) => {
+    const { filterAndSort } = this.props;
+    const value = e.target.value;
+
+
+    this.setState({[fieldName]: value}, () => {
       const {sorting} = this.props;
-      filterAndSort(sorting, title.toLowerCase())
+      let { title, from, to } = this.state;
+
+      from = +from;
+      to = +to;
+
+      filterAndSort(sorting, title.toLowerCase(), {from, to} );
     });
-  }
+    
+  };
+
+
 
   render() {
     const {setSorting} = this.props;
 
     return (
       <>
-        <Input  onChange={this.handlChange} />
+        <Input onChange={(e) => this.handlChange(e,'title')} placeholder="Введите название" />
+        <Input onChange={(e) => this.handlChange(e,'from')} placeholder="От" />
+        <Input onChange={(e) => this.handlChange(e,'to')} placeholder="До" />
         <Button name="А-Я" onClick={() => {
             setSorting(SORT_BY_ALPHABET_BEGIN)
           }}

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Good from '../Good';
-import Error from '../Error';
 
 const List = ({ sortedGoods }) => {
   return(

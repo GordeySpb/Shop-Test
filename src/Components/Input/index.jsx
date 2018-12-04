@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ onChange }) => <input type="text" placeholder="Введите название" onChange={onChange} />
+const Input = ({ onChange, placeholder }) => <input type="text" placeholder={placeholder} onChange={onChange} />
 
 
 export default Input;
