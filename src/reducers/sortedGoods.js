@@ -5,15 +5,15 @@ const filterByTitle = (title, goods) => title ? goods.filter(good => good.data.t
 
 
 const filterByPrice = ({from, to}, state) => {
-  if (from && to) {
+  if (+from && +to) {
     return filterByBoth({from, to},state)
   };
 
-  if (from && !to) {
+  if (+from && +!to) {
     return fiterByFrom(from,state)
   }
 
-  if (!from && to) {
+  if (+!from && +to) {
     return fiterByTo(to,state)
   }
   

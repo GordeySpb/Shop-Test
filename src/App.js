@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+
 
 import HeaderContainer from './containers/HeaderContainer';
 import ListContainer from './containers/ListContainer';
 import PreloaderContainer from './containers/PreloaderContainer';
 import ErrorContainer from './containers/ErrorContainer';
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
-      <main>
+      <main className="App" >
         <HeaderContainer />
         <PreloaderContainer />
         <ErrorContainer />
         <ListContainer />
       </main>
     );
-  }
 }
 
 export default App;

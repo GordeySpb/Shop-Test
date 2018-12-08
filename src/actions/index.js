@@ -9,23 +9,23 @@ export const SET_PRELOADER_STATE = 'SET_PRELOADER_STATE';
 
 export const filterAndSort = (payload) => ({ type: FILTER_AND_SORT, payload });
 export const setSorting = (payload) => ({ type: SET_SORTING, payload });
-export const addGoodsAction = (payload) => ({ type: SET_NEW_GOODS, payload });
-export const toggleErrorAction = (payload) => ({ type: SET_ERROR_STATE, payload });
-export const togglePreloaderAction = (payload) => ({ type: SET_PRELOADER_STATE, payload });
+export const setGoods = (payload) => ({ type: SET_NEW_GOODS, payload });
+export const toggleError = (payload) => ({ type: SET_ERROR_STATE, payload });
+export const togglePreloader = (payload) => ({ type: SET_PRELOADER_STATE, payload });
 
 export const addGoods = () => (dispatch) => {
-  dispatch(togglePreloaderAction(true))
+  dispatch(togglePreloader(true))
 
   return axios.get('/goods')
     .then(res => res.data.goods)
     .then(goods => {
       if (goods) {
-        dispatch(addGoodsAction(goods));
+        dispatch(setGoods(goods));
       }
     })
-    .then(() => dispatch(togglePreloaderAction(false)))
+    .then(() => dispatch(togglePreloader(false)))
     .catch(() => {
-      dispatch(toggleErrorAction(true))
-      dispatch(togglePreloaderAction(false))
+      dispatch(toggleError(true))
+      dispatch(togglePreloader(false))
     })  
 };

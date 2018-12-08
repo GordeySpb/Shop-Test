@@ -1,6 +1,4 @@
 import React from 'react';
 
-const Input = ({ onChange, placeholder }) => <input type="text" placeholder={placeholder} onChange={onChange} />
+export const Input = ({ onChange, placeholder }) =>  <input className="form-control" onChange={onChange} type="text" placeholder={placeholder} />
 
-
-export default Input;

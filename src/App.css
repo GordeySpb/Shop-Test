@@ -1,0 +1,58 @@
+.App {
+  width: 1100px;
+  margin: 50px auto;
+}
+
+
+
+.form-control {
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+
+
+.sort-input {
+  display: flex;
+  width: 100%;
+}
+
+
+.sort-input:nth-child(2) {
+  width: 30%;
+}
+
+.btn-controls {
+  display: flex;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.btn {
+  margin-right: 20px;
+  width: 180px;
+}
+
+.table th {
+  text-align: center !important;
+}
+
+.table td {
+  vertical-align: middle !important;
+  border-width: medium;
+  text-align: center;
+  border: 1px solid #dbdbdb !important;
+}
+
+
+
+.good-img {
+  max-width: 160px; 
+}
+
+
+.good-title {
+  text-align: center;
+}
+
+

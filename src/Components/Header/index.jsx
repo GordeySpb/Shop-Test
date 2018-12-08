@@ -2,8 +2,8 @@ import React from 'react';
 
 import {SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END} from '../../sorting';
 
-import Input from '../Input';
-import Button from '../Button';
+import { Input }  from '../Input';
+import { Button } from '../Button';
 
 class Header extends React.Component {
   constructor(props) {
@@ -24,10 +24,10 @@ class Header extends React.Component {
 
     this.setState({[fieldName]: value}, () => {
       const {sorting} = this.props;
-      let { title, from, to } = this.state;
+      const { title } = this.state;
+      let from = +this.state.from;
+      let to = +this.state.to;
 
-      from = +from;
-      to = +to;
 
       filterAndSort(sorting, title.toLowerCase(), {from, to} );
     });
@@ -40,27 +40,34 @@ class Header extends React.Component {
     const {setSorting} = this.props;
 
     return (
-      <>
+      <header>
+        
         <Input onChange={(e) => this.handlChange(e,'title')} placeholder="Введите название" />
-        <Input onChange={(e) => this.handlChange(e,'from')} placeholder="От" />
-        <Input onChange={(e) => this.handlChange(e,'to')} placeholder="До" />
-        <Button name="А-Я" onClick={() => {
-            setSorting(SORT_BY_ALPHABET_BEGIN)
-          }}
-        />
-        <Button name="Я-А" onClick={() => {
-            setSorting(SORT_BY_ALPHABET_END)
-          }}
-        />
-        <Button name="Цена по возростанию" onClick={() => {
-            setSorting(SORT_PRICE_BEGIN)
-          }}
-        />
-        <Button name="Цена по убыванию" onClick={() => {
-          setSorting(SORT_PRICE_END)
-          }}
-        />
-      </>
+        <div className="sort-input">
+          <Input onChange={(e) => this.handlChange(e,'from')} placeholder="От" />
+          <Input onChange={(e) => this.handlChange(e,'to')} placeholder="До" />
+        </div>
+
+        <div className="btn-controls" >
+          <Button name="Цена &#x2191;" onClick={() => {
+              setSorting(SORT_PRICE_BEGIN)
+            }}
+          />
+          <Button name="Цена &#x2193;" onClick={() => {
+            setSorting(SORT_PRICE_END)
+            }}
+          />
+          <Button name="Фильтр &#x25b2;" onClick={() => {
+              setSorting(SORT_BY_ALPHABET_BEGIN)
+            }}
+          />
+          <Button name="Фильтр &#x25bc;" onClick={() => {
+              setSorting(SORT_BY_ALPHABET_END)
+            }}
+          />
+        </div>
+
+      </header>
     );
   }
 

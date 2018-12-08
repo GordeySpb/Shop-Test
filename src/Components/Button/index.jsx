@@ -1,5 +1,6 @@
 import React from 'react';
 
-const Button = ({ name, onClick }) => (<button onClick={onClick}>{name}</button>);
 
-export default Button;
+export const Button = ({ name, onClick }) => <button type="button" className="btn btn-light" onClick={onClick}>{name}</button>
+
+
