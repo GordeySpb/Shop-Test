@@ -1,11 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END} from '../../sorting';
 
 import { Input }  from '../Input';
 import { Button } from '../Button';
 
-class Header extends React.Component {
+/**Компонент Header
+ * @param {Function} param.filterAndSort функция фильтрации и сортровки товара
+ * @param {Function} param.setSorting функция указывающая как сортировать товар
+ * @param {string} param.sorting строка с типом сортировки
+ * 
+ */
+
+export class Header extends React.Component {
   constructor(props) {
     super(props)
 
@@ -57,11 +65,11 @@ class Header extends React.Component {
             setSorting(SORT_PRICE_END)
             }}
           />
-          <Button name="Фильтр &#x25b2;" onClick={() => {
+          <Button name="Алфавит &#x25b2;" onClick={() => {
               setSorting(SORT_BY_ALPHABET_BEGIN)
             }}
           />
-          <Button name="Фильтр &#x25bc;" onClick={() => {
+          <Button name="Алфавит &#x25bc;" onClick={() => {
               setSorting(SORT_BY_ALPHABET_END)
             }}
           />
@@ -73,5 +81,15 @@ class Header extends React.Component {
 
 };
 
+Header.propTypes = {
+  filterAndSort: PropTypes.func,
+  setSorting: PropTypes.func,
+  sorting: PropTypes.string.isRequired,
 
-export default Header;
+};
+
+Header.defaultprops = {
+  filterAndSort: () => {},
+  setSorting: () => {},
+}
+

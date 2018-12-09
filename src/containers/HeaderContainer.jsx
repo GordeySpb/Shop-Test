@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { filterAndSort,  setSorting } from '../actions';
-import Header from '../Components/Header';
+import { Header } from '../Components/Header';
 
 const mapStateToProps = ({ goods, sorting }) => ({ goods, sorting });
 

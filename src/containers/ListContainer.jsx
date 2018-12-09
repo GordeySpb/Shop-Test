@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import List from '../Components/List';
+import { List } from '../Components/List';
 
 const mapStateToProps = ({sortedGoods, error}) => ({ sortedGoods, error });
 

@@ -1,5 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Preloader = ({preloader}) => (preloader ? <div>Loading....</div> : null);
+/**Компонент Preloader
+ * @param {bool} param.preloader состояние прелоадера
+ */
 
-export default Preloader;
+export const Preloader = ({preloader}) => (preloader ? <div>Loading....</div> : null);
+
+Preloader.propTypes = {
+  preloader: PropTypes.bool.isRequired,
+}

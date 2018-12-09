@@ -13,6 +13,10 @@ export const setGoods = (payload) => ({ type: SET_NEW_GOODS, payload });
 export const toggleError = (payload) => ({ type: SET_ERROR_STATE, payload });
 export const togglePreloader = (payload) => ({ type: SET_PRELOADER_STATE, payload });
 
+/**Получает массив с товарами от сервера
+ * @returns {Array}
+ */
+
 export const addGoods = () => (dispatch) => {
   dispatch(togglePreloader(true))
 

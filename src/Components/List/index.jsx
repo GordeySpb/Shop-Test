@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import Good from '../Good';
+import { Good } from '../Good';
 
-const List = ({ sortedGoods }) => {
+/**Компонет List
+ * @param {array} param.sortedGoods массив товаров
+ * 
+ */
+
+export const List = ({ sortedGoods }) => {
   return(
 
   <table className="table table-borderless">
@@ -30,4 +36,8 @@ const List = ({ sortedGoods }) => {
   );
 }
 
-export default List;
+List.propTypes = {
+  sortedGoods:PropTypes.array.isRequired,
+};
+
+

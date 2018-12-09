@@ -1,5 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Error = ({error}) => (error ? <div>Try again</div> : null);
+/**Компонент Error
+ * @param {bool} param.bool состояние ошибки
+ */
 
-export default Error;
+export const Error = ({error}) => (error ? <div>Try again</div> : null);
+
+Error.propTypes = {
+  error: PropTypes.bool.isRequired,
+};
