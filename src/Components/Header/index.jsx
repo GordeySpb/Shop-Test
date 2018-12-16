@@ -1,76 +1,89 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END} from '../../sorting';
+import {
+  SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END,
+} from '../../sorting';
 
-import { Input }  from '../Input';
-import { Button } from '../Button';
+import Input from '../Input';
+import Button from '../Button';
 
-/**Компонент Header
+/** Компонент Header
  * @param {Function} param.filterAndSort функция фильтрации и сортровки товара
  * @param {Function} param.setSorting функция указывающая как сортировать товар
  * @param {string} param.sorting строка с типом сортировки
- * 
+ *
  */
 
-export class Header extends React.Component {
+class Header extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       title: '',
       from: '',
-      to: ''
+      to: '',
     };
+
+    this.handlChange = this.handlChange.bind(this);
   }
 
 
-  handlChange = (e, fieldName) => {
+  handlChange(e, fieldName) {
     const { filterAndSort } = this.props;
-    const value = e.target.value;
+    const { value } = e.target;
 
 
-    this.setState({[fieldName]: value}, () => {
-      const {sorting} = this.props;
+    this.setState({ [fieldName]: value }, () => {
+      const { sorting } = this.props;
       const { title } = this.state;
-      let from = +this.state.from;
-      let to = +this.state.to;
+      let { from } = this.state;
+      let { to } = this.state;
+
+      from = +from;
+      to = +to;
 
 
-      filterAndSort(sorting, title.toLowerCase(), {from, to} );
+      filterAndSort(sorting, title.toLowerCase(), { from, to });
     });
-    
-  };
-
+  }
 
 
   render() {
-    const {setSorting} = this.props;
+    const { setSorting } = this.props;
 
     return (
       <header>
-        
-        <Input onChange={(e) => this.handlChange(e,'title')} placeholder="Введите название" />
+
+        <Input onChange={e => this.handlChange(e, 'title')} placeholder="Введите название" />
         <div className="sort-input">
-          <Input onChange={(e) => this.handlChange(e,'from')} placeholder="От" />
-          <Input onChange={(e) => this.handlChange(e,'to')} placeholder="До" />
+          <Input onChange={e => this.handlChange(e, 'from')} placeholder="От" />
+          <Input onChange={e => this.handlChange(e, 'to')} placeholder="До" />
         </div>
 
-        <div className="btn-controls" >
-          <Button name="Цена &#x2191;" onClick={() => {
-              setSorting(SORT_PRICE_BEGIN)
+        <div className="btn-controls">
+          <Button
+            name="Цена &#x2191;"
+            onClick={() => {
+              setSorting(SORT_PRICE_BEGIN);
             }}
           />
-          <Button name="Цена &#x2193;" onClick={() => {
-            setSorting(SORT_PRICE_END)
+          <Button
+            name="Цена &#x2193;"
+            onClick={() => {
+              setSorting(SORT_PRICE_END);
             }}
           />
-          <Button name="Алфавит &#x25b2;" onClick={() => {
-              setSorting(SORT_BY_ALPHABET_BEGIN)
+          <Button
+            name="Алфавит &#x25b2;"
+            onClick={() => {
+              setSorting(SORT_BY_ALPHABET_BEGIN);
             }}
           />
-          <Button name="Алфавит &#x25bc;" onClick={() => {
-              setSorting(SORT_BY_ALPHABET_END)
+          <Button
+            name="Алфавит &#x25bc;"
+            onClick={() => {
+              setSorting(SORT_BY_ALPHABET_END);
             }}
           />
         </div>
@@ -78,18 +91,14 @@ export class Header extends React.Component {
       </header>
     );
   }
-
-};
+}
 
 Header.propTypes = {
-  filterAndSort: PropTypes.func,
-  setSorting: PropTypes.func,
+  filterAndSort: PropTypes.func.isRequired,
+  setSorting: PropTypes.func.isRequired,
   sorting: PropTypes.string.isRequired,
 
 };
 
-Header.defaultprops = {
-  filterAndSort: () => {},
-  setSorting: () => {},
-}
 
+export default Header;

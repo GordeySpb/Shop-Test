@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 
-import { List } from '../Components/List';
+import List from '../Components/List';
 
-const mapStateToProps = ({sortedGoods, error}) => ({ sortedGoods, error });
+const mapStateToProps = ({ sortedGoods, error }) => ({ sortedGoods, error });
 
-const ListContayner = connect(mapStateToProps)(List)
+const ListContayner = connect(mapStateToProps)(List);
 
 export default ListContayner;
-

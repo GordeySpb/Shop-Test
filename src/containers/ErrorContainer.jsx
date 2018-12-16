@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { Error } from '../Components/Error';
+import Error from '../Components/Error';
 
 const mapStateToProps = ({ error }) => ({ error });
 

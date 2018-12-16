@@ -1,34 +1,38 @@
-import { FILTER_AND_SORT, SET_SORTING, SET_NEW_GOODS } from '../actions';
-import { SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END } from '../sorting';
+import {
+  FILTER_AND_SORT, SET_SORTING, SET_NEW_GOODS, SET_GOODS,
+} from '../actions';
+import {
+  SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END,
+} from '../sorting';
 
-const filterByTitle = (title, goods) => title ? goods.filter(good => good.data.title.toLowerCase().includes(title)) : goods;
+const filterByBoth = ({ from, to }, goods) => goods
+  .filter(good => (good.data.price >= from && good.data.price <= to ? good : null));
+const fiterByFrom = (from, goods) => goods.filter(good => (good.data.price >= from ? good : null));
+const fiterByTo = (to, goods) => goods.filter(good => (good.data.price <= to ? good : null));
 
-
-const filterByPrice = ({from, to}, state) => {
-  if (+from && +to) {
-    return filterByBoth({from, to},state)
-  };
-
-  if (+from && +!to) {
-    return fiterByFrom(from,state)
+const filterByPrice = ({ from, to }, state) => {
+  if (from && to) {
+    return filterByBoth({ from, to }, state);
   }
 
-  if (+!from && +to) {
-    return fiterByTo(to,state)
+  if (from && !to) {
+    return fiterByFrom(from, state);
   }
-  
+
+  if (!from && to) {
+    return fiterByTo(to, state);
+  }
+
   return state;
 };
 
+const filterByTitle = (title, goods) => (title ? goods
+  .filter(good => good.data.title.toLowerCase().includes(title)) : goods);
 
-const filterByBoth = ({from, to},goods) => goods.filter(good => good.data.price >= from && good.data.price <= to ? good : null )
-const fiterByFrom = (from, goods) => goods.filter(good => good.data.price >= from ? good : null);
-const fiterByTo = (to, goods) => goods.filter(good => good.data.price <= to ? good : null);
-const filterByPriceProvider = ({from, to, goods}) => filterByPrice({from, to}, goods);
-const filterByTitleProvider  = ({title, goods}) => filterByTitle(title, goods);
+const filterByPriceProvider = ({ from, to, goods }) => filterByPrice({ from, to }, goods);
+const filterByTitleProvider = ({ title, goods }) => filterByTitle(title, goods);
 
 const filters = [filterByPriceProvider, filterByTitleProvider];
-
 
 
 const sort = (sorting, goods) => {
@@ -42,30 +46,34 @@ const sort = (sorting, goods) => {
     case SORT_BY_ALPHABET_BEGIN:
       return goods.sort((a, b) => a.data.title.localeCompare(b.data.title));
 
-      case SORT_BY_ALPHABET_END:
+    case SORT_BY_ALPHABET_END:
       return goods.sort((a, b) => b.data.title.localeCompare(a.data.title));
-    
+
     default:
       return goods;
   }
 };
 
+let filtered;
+let sortedGoodsArr;
 
-const sortedGoods = (state = [], {type, payload}) => {
-
+const sortedGoods = (state = [], { type, payload }) => {
   switch (type) {
-    case FILTER_AND_SORT: 
-    const filtered = filters.reduce((filteringGoods, filter) => {
-      const filteredGoods = filter({...payload, goods: filteringGoods}); 
-      return filteredGoods;
-    }, payload.goods);
+    case FILTER_AND_SORT:
+      filtered = filters.reduce((filteringGoods, filter) => {
+        const filteredGoods = filter({ ...payload, goods: filteringGoods });
+        return filteredGoods;
+      }, payload.goods);
 
 
-    const sortedGoods = sort(payload.sorting, filtered);
+      sortedGoodsArr = sort(payload.sorting, filtered);
 
-    return [...sortedGoods];
+      return [...sortedGoodsArr];
 
     case SET_NEW_GOODS:
+      return payload;
+
+    case SET_GOODS:
       return payload;
 
 

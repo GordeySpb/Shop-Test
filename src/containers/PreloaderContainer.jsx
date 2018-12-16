@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { Preloader } from '../Components/Preloader';
+import Preloader from '../Components/Preloader';
 
 const mapStateToProps = ({ preloader }) => ({ preloader });
 

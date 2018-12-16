@@ -1,28 +1,26 @@
 export const loadState = (key = 'state') => {
   try {
-    let json = localStorage.getItem(key);
+    const json = localStorage.getItem(key);
 
     if (json === null) {
-      return undefined
-    } else {
-      return JSON.parse(json);
+      return undefined;
     }
+    return JSON.parse(json);
   } catch (error) {
-    return undefined
+    return undefined;
   }
 };
 
-export default key => store => next => action => {
-  let result = next(action);
+
+export default key => store => next => (action) => {
+  const result = next(action);
 
   try {
-    let json = JSON.stringify(key ? store.getState()[key] : store.getState());
+    const json = JSON.stringify(key ? store.getState()[key] : store.getState());
     localStorage.setItem(key || 'state', json);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-  
+
   return result;
 };
-
-

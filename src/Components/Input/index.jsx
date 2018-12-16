@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**Компонент Input
+/** Компонент Input
  * @param {Function} param.onChange функция фильтрации/сортировки
- * @param {string} param.placeholder значение placeholder для инпута 
+ * @param {string} param.placeholder значение placeholder для инпута
  */
 
-export const Input = ({ onChange, placeholder }) =>  <input className="form-control" onChange={onChange} type="text" placeholder={placeholder} />
+const Input = ({ onChange, placeholder }) => <input className="form-control" onChange={onChange} type="text" placeholder={placeholder} />;
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
 };
+
+export default Input;

@@ -4,7 +4,6 @@ const initialState = '';
 
 const sorting = (state = initialState, { type, payload }) => {
   switch (type) {
-
     case SET_SORTING:
       return payload;
 

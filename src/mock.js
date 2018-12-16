@@ -6,6 +6,6 @@ const { goods } = require('./shop.json');
 
 const mock = new MockAdapter(axios, { delayResponse: 5000 });
 
-mock.onGet('/goods').reply(200, {goods});
+mock.onGet('/goods').reply(200, { goods });
 
 export default mock;

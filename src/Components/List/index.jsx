@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Good } from '../Good';
+import Good from '../Good';
 
-/**Компонет List
+/** Компонет List
  * @param {array} param.sortedGoods массив товаров
- * 
+ *
  */
 
-export const List = ({ sortedGoods }) => {
-  return(
+const List = ({ sortedGoods }) => (
 
   <table className="table table-borderless">
     <thead>
@@ -20,24 +19,23 @@ export const List = ({ sortedGoods }) => {
       </tr>
     </thead>
     <tbody>
-      {sortedGoods.map((good) => (
-          <Good
-            key={good.id}
-            title={good.data.title}
-            url={good.data.base_url}
-            price={good.data.price}
-          />
-        ))
+      {sortedGoods.map(good => (
+        <Good
+          key={good.id}
+          title={good.data.title}
+          url={good.data.base_url}
+          price={good.data.price}
+        />
+      ))
       }
 
     </tbody>
   </table>
-    
-  );
-}
+
+);
 
 List.propTypes = {
-  sortedGoods:PropTypes.array.isRequired,
+  sortedGoods: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-
+export default List;

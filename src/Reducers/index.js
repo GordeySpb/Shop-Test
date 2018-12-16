@@ -11,5 +11,5 @@ export default combineReducers({
   sortedGoods,
   sorting,
   error,
-  preloader
+  preloader,
 });
