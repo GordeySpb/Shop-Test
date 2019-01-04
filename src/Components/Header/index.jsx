@@ -19,46 +19,51 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      title: '',
-      from: '',
-      to: '',
-    };
 
-    this.handlChange = this.handlChange.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
+    this.handleSaleFrom = this.handleSaleFrom.bind(this);
+    this.handleSaleTo = this.handleSaleTo.bind(this);
   }
 
 
-  handlChange(e, fieldName) {
-    const { filterAndSort } = this.props;
+  handleFilter(e) {
     const { value } = e.target;
+    const { setFilter, filterAndSort } = this.props;
 
-
-    this.setState({ [fieldName]: value }, () => {
-      const { sorting } = this.props;
-      const { title } = this.state;
-      let { from } = this.state;
-      let { to } = this.state;
-
-      from = +from;
-      to = +to;
-
-
-      filterAndSort(sorting, title.toLowerCase(), { from, to });
-    });
+    setFilter(value);
+    filterAndSort('', value);
   }
 
+  handleSaleFrom(e) {
+    const from = e.target.value;
+    const {
+      setSaleFrom, filterAndSort, sorting,
+    } = this.props;
+
+    setSaleFrom({ from: +from });
+    filterAndSort(sorting, '', { from });
+  }
+
+  handleSaleTo(e) {
+    const to = e.target.value;
+    const {
+      setSaleTo, filterAndSort, sorting, sale,
+    } = this.props;
+    const { from } = sale;
+
+    setSaleTo({ to: +to });
+    filterAndSort(sorting, '', { from, to });
+  }
 
   render() {
     const { setSorting } = this.props;
 
     return (
       <header>
-
-        <Input onChange={e => this.handlChange(e, 'title')} placeholder="Введите название" />
+        <Input onChange={this.handleFilter} placeholder="Введите название" />
         <div className="sort-input">
-          <Input onChange={e => this.handlChange(e, 'from')} placeholder="От" />
-          <Input onChange={e => this.handlChange(e, 'to')} placeholder="До" />
+          <Input onChange={this.handleSaleFrom} placeholder="От" />
+          <Input onChange={this.handleSaleTo} placeholder="До" />
         </div>
 
         <div className="btn-controls">
@@ -97,7 +102,10 @@ Header.propTypes = {
   filterAndSort: PropTypes.func.isRequired,
   setSorting: PropTypes.func.isRequired,
   sorting: PropTypes.string.isRequired,
-
+  sale: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setFilter: PropTypes.func.isRequired,
+  setSaleFrom: PropTypes.func.isRequired,
+  setSaleTo: PropTypes.func.isRequired,
 };
 
 

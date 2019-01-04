@@ -1,20 +1,29 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { filterAndSort, setSorting } from '../actions';
+import {
+  filterAndSort, setSorting, setFilter, setSaleFrom, setSaleTo,
+} from '../actions';
 import Header from '../Components/Header';
 
-const mapStateToProps = ({ goods, sorting }) => ({ goods, sorting });
+const mapStateToProps = ({
+  sorting, sale, goods, sortedGoods,
+}) => ({
+  sorting, sale, goods, sortedGoods,
+});
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ filterAndSort, setSorting }, dispatch)
+  bindActionCreators({
+    filterAndSort, setSorting, setFilter, setSaleFrom, setSaleTo,
+  }, dispatch)
 );
 
-const mergeProps = ({ goods, sorting }, { filterAndSort, ...dispatchProps }) => ({
+const mergeProps = ({ goods, sorting, ...state }, { filterAndSort, ...dispatchProps }) => ({
   filterAndSort: (sorting, title, { from = '', to = '' } = {}) => filterAndSort({
     goods, title, from, to, sorting,
   }),
   sorting,
+  ...state,
   ...dispatchProps,
 });
 
