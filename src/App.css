@@ -55,4 +55,13 @@
   text-align: center;
 }
 
+.pagination {
+  display: flex;
+  flex-direction: row;
+}
+
+.pagination__item {
+  margin-left: 10px;
+}
+
 

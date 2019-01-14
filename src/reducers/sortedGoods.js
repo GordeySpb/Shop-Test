@@ -5,6 +5,7 @@ import {
   SORT_BY_ALPHABET_BEGIN, SORT_BY_ALPHABET_END, SORT_PRICE_BEGIN, SORT_PRICE_END,
 } from '../sorting';
 
+
 const filterByBoth = ({ from, to }, goods) => goods
   .filter(good => (good.data.price >= from && good.data.price <= to ? good : null));
 const fiterByFrom = (from, goods) => goods.filter(good => (good.data.price >= from ? good : null));
@@ -37,17 +38,17 @@ const filters = [filterByPriceProvider, filterByTitleProvider];
 
 const sort = (sorting, goods) => {
   switch (sorting) {
-    case SORT_PRICE_BEGIN:
-      return goods.sort((a, b) => a.data.price - b.data.price);
+    case SORT_PRICE_BEGIN: 
+      return [...goods].sort((a, b) => a.data.price - b.data.price);
 
     case SORT_PRICE_END:
-      return goods.sort((a, b) => b.data.price - a.data.price);
+      return [...goods].sort((a, b) => b.data.price - a.data.price);
 
     case SORT_BY_ALPHABET_BEGIN:
-      return goods.sort((a, b) => a.data.title.localeCompare(b.data.title));
+      return [...goods].sort((a, b) => a.data.title.localeCompare(b.data.title));
 
     case SORT_BY_ALPHABET_END:
-      return goods.sort((a, b) => b.data.title.localeCompare(a.data.title));
+      return [...goods].sort((a, b) => b.data.title.localeCompare(a.data.title));
 
     default:
       return goods;
@@ -56,8 +57,14 @@ const sort = (sorting, goods) => {
 
 let filtered;
 let sortedGoodsArr;
+let sorted;
 
-const sortedGoods = (state = [], { type, payload }) => {
+const initialState = {
+  items: [],
+  page: 0,
+};
+
+const sortedGoods = (state = initialState, { type, payload }) => {
   switch (type) {
     case FILTER_AND_SORT:
       filtered = filters.reduce((filteringGoods, filter) => {
@@ -68,19 +75,19 @@ const sortedGoods = (state = [], { type, payload }) => {
 
       sortedGoodsArr = sort(payload.sorting, filtered);
 
-      return [...sortedGoodsArr];
+      return { items: sortedGoodsArr };
 
     case SET_NEW_GOODS:
-      return payload;
+      return { ...payload };
 
     case SET_GOODS:
       return payload;
 
 
-    case SET_SORTING: {
-      const sorted = sort(payload, state);
-      return [...sorted];
-    }
+    case SET_SORTING:
+      sorted = sort(payload, state.items);
+      return { items: sorted };
+
 
     default:
       return state;

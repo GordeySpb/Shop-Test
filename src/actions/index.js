@@ -21,18 +21,19 @@ export const setFilter = payload => ({ type: SET_FILTER, payload });
 export const setSaleFrom = payload => ({ type: SET_SALE_FROM, payload });
 export const setSaleTo = payload => ({ type: SET_SALE_TO, payload });
 
-/** Получает массив с товарами от сервера
- * @returns {Array}
+
+/** Получает Обьект с товарами от сервера
+ * @returns {Object}
  */
 
 export const addGoods = () => (dispatch) => {
   dispatch(togglePreloader(true));
 
   return axios.get('/goods')
-    .then(res => res.data.goods)
-    .then((goods) => {
-      if (goods) {
-        dispatch(setGoods(goods));
+    .then(res => res.data)
+    .then((data) => {
+      if (data) {
+        dispatch(setGoods(data));
       }
     })
     .then(() => dispatch(togglePreloader(false)))

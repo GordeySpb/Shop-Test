@@ -3,14 +3,15 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import reducer from '../reducers';
 
+
 import localStorage, { loadState } from '../middleware/local-storage';
 import {
   addGoods, setGoods, setSorting, setGoodsFromLS,
 } from '../actions';
 
-
-const store = createStore(reducer, {}, applyMiddleware(localStorage(), thunk, logger));
 const stateFromLS = loadState();
+const store = createStore(reducer, stateFromLS, applyMiddleware(localStorage(), thunk, logger));
+
 
 if (stateFromLS) {
   const { sortedGoods, sorting, goods } = stateFromLS;
@@ -20,5 +21,6 @@ if (stateFromLS) {
 } else {
   store.dispatch(addGoods());
 }
+
 
 export default store;
