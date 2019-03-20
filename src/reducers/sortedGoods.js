@@ -38,7 +38,7 @@ const filters = [filterByPriceProvider, filterByTitleProvider];
 
 const sort = (sorting, goods) => {
   switch (sorting) {
-    case SORT_PRICE_BEGIN: 
+    case SORT_PRICE_BEGIN:
       return [...goods].sort((a, b) => a.data.price - b.data.price);
 
     case SORT_PRICE_END:

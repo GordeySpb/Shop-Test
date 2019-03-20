@@ -56,14 +56,16 @@ class Header extends React.Component {
   }
 
   render() {
-    const { setSorting } = this.props;
+    const { setSorting, ...state } = this.props;
+    const { filter, sale: { from, to } } = state;
+    console.log(state)
 
     return (
       <header>
-        <Input onChange={this.handleFilter} placeholder="Введите название" />
+        <Input onChange={this.handleFilter} placeholder="Введите название" value={filter} defaultValue="Введите название" />
         <div className="sort-input">
-          <Input onChange={this.handleSaleFrom} placeholder="От" />
-          <Input onChange={this.handleSaleTo} placeholder="До" />
+          <Input onChange={this.handleSaleFrom} placeholder="От" value={from ? from : ""} />
+          <Input onChange={this.handleSaleTo} placeholder="До" value={to} />
         </div>
 
         <div className="btn-controls">

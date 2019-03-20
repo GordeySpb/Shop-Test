@@ -7,9 +7,9 @@ import {
 import Header from '../Components/Header';
 
 const mapStateToProps = ({
-  sorting, sale, goods, sortedGoods,
+  sorting, sale, goods, sortedGoods, filter,
 }) => ({
-  sorting, sale, goods: goods.items, sortedGoods: sortedGoods.items,
+  sorting, sale, goods: goods.items, sortedGoods: sortedGoods.items, filter,
 });
 
 const mapDispatchToProps = dispatch => (

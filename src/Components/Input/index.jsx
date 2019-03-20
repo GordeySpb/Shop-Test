@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
  * @param {string} param.placeholder значение placeholder для инпута
  */
 
-const Input = ({ onChange, placeholder }) => <input className="form-control" onChange={onChange} type="text" placeholder={placeholder} />;
+const Input = ({ onChange, placeholder, value }) => <input className="form-control" onChange={onChange} type="text" placeholder={placeholder} value={value} />;
+
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
