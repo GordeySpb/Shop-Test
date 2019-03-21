@@ -18,7 +18,7 @@ const stateFromLS = loadState();
 const store = createStore(
   reducer,
   {},
-  applyMiddleware(localStorage(), thunk, logger);
+  applyMiddleware(localStorage(), thunk, logger)
 );
 
 if (stateFromLS) {

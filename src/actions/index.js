@@ -53,3 +53,43 @@ export const addGoods = () => dispatch => {
       dispatch(togglePreloader(false));
     });
 };
+
+export const nextGoods = page => dispatch => {
+  dispatch(togglePreloader(true));
+
+  return axios
+    .get(`/next/${page}`)
+    .then(res => res.data)
+    .then(data => {
+      if (data) {
+        dispatch(setGoods(data));
+      }
+    })
+    .then(() => dispatch(togglePreloader(false)))
+    .catch(() => {
+      dispatch(toggleError(true));
+      dispatch(togglePreloader(false));
+    });
+};
+
+export const prevGoods = page => dispatch => {
+  dispatch(togglePreloader(true));
+  let url = `/next/${page}`;
+  if (page === 1 || page >= 5) {
+    url = "/goods";
+  }
+
+  return axios
+    .get(url)
+    .then(res => res.data)
+    .then(data => {
+      if (data) {
+        dispatch(setGoods(data));
+      }
+    })
+    .then(() => dispatch(togglePreloader(false)))
+    .catch(() => {
+      dispatch(toggleError(true));
+      dispatch(togglePreloader(false));
+    });
+};

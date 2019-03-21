@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Pagination from '../Pagination';
 
 import Good from '../Good';
 
@@ -8,7 +9,7 @@ import Good from '../Good';
  *
  */
 
-const List = ({ sortedGoods }) => (
+const List = ({ items, page, nextGoods, prevGoods }) => (
 
   <table className="table table-borderless">
     <thead>
@@ -19,7 +20,7 @@ const List = ({ sortedGoods }) => (
       </tr>
     </thead>
     <tbody>
-      {sortedGoods.map(good => (
+      {items.map(good => (
         <Good
           key={good.id}
           title={good.data.title}
@@ -29,12 +30,19 @@ const List = ({ sortedGoods }) => (
 
       ))}
     </tbody>
+    <Pagination page={page} onNext={nextGoods} onPrev={prevGoods} />
   </table>
 
 );
 
 List.propTypes = {
-  sortedGoods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
+  page: PropTypes.number,
+};
+
+List.defaultProps = {
+  items: [],
+  page: 1,
 };
 
 export default List;
