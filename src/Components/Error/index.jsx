@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
  * @param {bool} param.bool состояние ошибки
  */
 
-const Error = ({ error }) => (error ? <div>Try again</div> : null);
+const Error = ({ error }) => (error ? <div className="error">Try again</div> : null);
 
 Error.propTypes = {
   error: PropTypes.bool.isRequired,

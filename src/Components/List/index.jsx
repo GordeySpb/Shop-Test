@@ -5,8 +5,10 @@ import Pagination from '../Pagination';
 import Good from '../Good';
 
 /** Компонет List
- * @param {array} param.sortedGoods массив товаров
- *
+ * @param {array} param.items массив товаров
+ *  * @param {number} param.page номер страницы
+ * @param {Function} param.onNext колбек для показа след товаров
+ * @param {Function} param.onPrev колбек для показа пред товаров
  */
 
 const List = ({ items, page, nextGoods, prevGoods }) => (
@@ -38,6 +40,8 @@ const List = ({ items, page, nextGoods, prevGoods }) => (
 List.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   page: PropTypes.number,
+  nextGoods: PropTypes.func.isRequired,
+  prevGoods: PropTypes.func.isRequired,
 };
 
 List.defaultProps = {

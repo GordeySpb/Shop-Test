@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
  * @param {bool} param.preloader состояние прелоадера
  */
 
-const Preloader = ({ preloader }) => (preloader ? <div>Loading....</div> : null);
+const Preloader = ({ preloader }) => (preloader ? <div className="preloader">Loading....</div> : null);
 
 Preloader.propTypes = {
   preloader: PropTypes.bool.isRequired,
