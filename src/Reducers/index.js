@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import goods from './goods';
-import sortedGoods from './sortedGoods';
-import sorting from './sorting';
-import error from './error';
-import preloader from './preloader';
-import filter from './filter';
-import sale from './sale';
+import goods from "./goods";
+import sortedGoods from "./sortedGoods";
+import sorting from "./sorting";
+import error from "./error";
+import preloader from "./preloader";
+import filter from "./filter";
+import sale from "./sale";
 
 export default combineReducers({
   goods,
@@ -15,5 +15,5 @@ export default combineReducers({
   error,
   preloader,
   filter,
-  sale,
+  sale
 });
